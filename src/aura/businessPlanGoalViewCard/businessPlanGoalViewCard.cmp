@@ -1,0 +1,90 @@
+<aura:component access="Public" controller="BusinessPlanUtilities" >
+    <aura:attribute name="title" type="String" default="Goal title"/>
+    <aura:attribute name="summary" type="String" default="Goal Summary goes here"/>
+    <aura:attribute name="initialValue" type="Decimal" default=""/>
+    <aura:attribute name="curentValue" type="Decimal" default=""/>
+    <aura:attribute name="targetValue" type="Decimal" default=""/>
+    <aura:attribute name="achieved" type="Decimal"/>
+    <aura:attribute name="overdue" type="Boolean" />
+    <aura:attribute name="goalCompleteButtonText" type="String" access="Public" />
+    <aura:attribute name="goalDueAlertText" type="String" access="Public" />
+    <aura:attribute name="type" type="String" default=""/>
+    <aura:attribute name="businessPlanStatus" type="String" />
+    <aura:attribute name="gId" type="Id" />
+    <aura:attribute name="editMode" type="Boolean" default="false" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:registerEvent name="refreshEvent" type="c:businessPlanRefreshRequestAppEvent"/>
+    
+    <lightning:card class="goal-view-card-styling">
+        <aura:set attribute="title">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-12">
+                     <lightning:icon iconName="custom:custom97" 
+                            class="card-icon"            
+                            size="small"/>
+                </div>
+
+                <div class="slds-col slds-size_10-of-12 title-styling">
+                	{! v.title } 
+                	
+                </div>
+                
+            </div>
+ 
+            
+            <aura:if isTrue="{! v.overdue}">
+                <div class="alert-styling">
+                    <lightning:badge class="alert-badge-styling" label="{!v.goalDueAlertText}"/>   
+                </div>
+             <aura:set attribute="else">
+                    <div class="alert-styling">
+                        
+                    </div>
+                </aura:set> 
+            </aura:if>
+        </aura:set>
+        
+        
+        <aura:set attribute="footer">
+            <lightning:badge class="footer-badge-styling" label="{!v.type}"/>
+            <lightning:button variant="bare" 
+                              label="" 
+                              iconName="utility:edit" 
+                              iconPosition="right" 
+                              title="Edit"
+                              onclick="{! c.editGoal }" />
+            
+            <lightning:button variant="bare" 
+                              label="" 
+                              iconName="utility:delete" 
+                              iconPosition="right" 
+                              title="Delete"
+                              disabled="{!v.businessPlanStatus == 'Published' ? true : false }"
+                              onclick="{! c.deleteGoal }" />
+        </aura:set>
+        
+        <div class="slds-grid slds-wrap goal-card-content-styling">
+            <div class="goal-summary-styling slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12 ring-container">
+                <c:businessPlanProgressRing start="{!v.initialValue}"
+                                            current="{!v.curentValue}"
+                                            total="{!v.targetValue}"
+                                            color="{! v.achieved > 33 ? ( v.achieved > 66 ? '#4DB6AC' : '#4FC3F7') : '#F4511E' }"/>
+
+                <button class="{! 'mark-complete ' + (v.curentValue &lt; v.targetValue ? 'valid' : 'completed') }" onclick="{! c.markComplete }">
+                    <div class="mark-complete-icon">
+                        <lightning:icon iconName="utility:like" />
+                    </div>
+                    <div>
+                        {!v.goalCompleteButtonText}
+                    </div>
+                </button>
+            </div>
+            <div class="goal-summary-styling slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 summary-container">
+                {!v.summary} 
+            </div>
+        </div>
+        
+    </lightning:card>
+    
+    
+</aura:component>

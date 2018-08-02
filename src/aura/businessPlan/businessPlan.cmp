@@ -1,0 +1,148 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" controller="BusinessPlanUtilities" >
+    <aura:attribute name="businessPlanLabel" type="String" access="Global" default="Business Plan" />
+    <aura:attribute name="publishButtonLabel" type="String" access="Global" default="Publish" />
+    <aura:attribute name="visionHeaderSummaryLabel" type="String" access="Global" default="Vision" />
+    <aura:attribute name="goalsHeaderLabel" type="String" access="Global" default="Goals" />
+    <aura:attribute name="markGoalCompleteLabel" type="String" access="Global" default="MARK COMPLETE" />
+    <aura:attribute name="invokeApproval" type="Boolean" access="Global" default="True" />
+    <aura:attribute name="goalDueAlertLabel" type="String" access="Global" default="Due Soon" />
+    <aura:attribute name="sortType" type="String" access="Global" default="By Goal Creation Date ASC" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="bPlanId" type="Id" access="Public" />
+    <aura:attribute name="bPlansforUser" type="Object[]" access="Public" />
+    <aura:attribute name="previousbPlanId" type="Id" access="Public" />
+    <aura:attribute name="pageLoadComplete" type="Boolean" default="false" />
+    <aura:attribute name="isPlanSubmitted" type="Boolean" />
+    <aura:attribute name="planCounter" type="Integer" default="0" />
+    <aura:handler event="c:businessPlanRefreshRequestAppEvent" action="{!c.refreshChild}"/>
+    
+    <aura:attribute name="refreshChild" type="Boolean" default="false" />
+    
+    <aura:attribute name="toastWhenNoBPlanExists" 
+                    type="String" 
+                    access="Global" 
+                    default="Please reach out to your channel 
+                             manager to request access to your business plan" />
+    
+    <aura:if isTrue="{! and(!v.bPlanId, v.pageLoadComplete) }">              
+        <ui:message title="No active business plan exists" severity="error" closable="true">
+            {! v.toastWhenNoBPlanExists }
+        </ui:message>
+        
+        <aura:set attribute="else">
+            <div>
+                <!-- Div that shows the header -->
+                <div class="slds-page-header slds-grid styling-page-header">
+                    <div class="slds-media slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+                        
+                        <div class="slds-media__body header-styling">
+                            <h1 class="slds-page-header__title slds-truncate slds-align-middle styling-header-vision" 
+                                title="Business Plan"> 
+                                <div class="header-text-style">
+                                    {!v.businessPlanLabel}  
+                                </div>
+                            </h1>     
+                        </div>
+                    </div>
+                    <div class="slds-col_bump-right slds-size_3-of-12 buttons-group-styling nav-desktop">
+                        <lightning:button variant="brand" 
+                                          label="" 
+                                          iconName="utility:back" 
+                                          class="styling-button-previous"
+                                          iconPosition="right" 
+                                          title="Show other plans I have"
+                                          onclick="{! c.showPreviousBusinessPlan}"
+                                          disabled="{! v.planCounter == v.bPlansforUser.length - 1 }">
+                        </lightning:button>
+                        <lightning:button variant="brand" 
+                                          label="" 
+                                          iconName="utility:forward" 
+                                          class="styling-button-previous"
+                                          iconPosition="right" 
+                                          title="Show other plan I have"
+                                          onclick="{! c.showNextBusinessPlan}"
+                                          disabled="{! v.planCounter == 0 }"
+                                          >
+                        </lightning:button>
+                        
+                        <lightning:button class="slds-button slds-button_stateful slds-is-selected slds-button_brand btn-styling" 
+                                          variant="brand"
+                                          onclick="{! c.submitPlan}"
+                                          disabled="{!v.isPlanSubmitted ? true : false }">
+                            {!v.publishButtonLabel}
+                        </lightning:button>
+                        
+                    </div>
+                </div>
+                
+                <!-- For mobile form factor only -->
+                <div class="slds-grid slds-grid_align-space nav-mobile">
+                    <div class="slds-col nav-button-container">
+                        <span class="{! 'slds-icon_container slds-icon_container--circle slds-button--brand nav-button ' + (v.planCounter == v.bPlansforUser.length - 1 ? 'disabled' : '') }">
+                            <lightning:buttonIcon iconName="utility:left" 
+                                                  variant="brand" 
+                                                  size="x-small" 
+                                                  alternativeText="Previous"
+                                                  onclick="{! c.showPreviousBusinessPlan}"
+                                                  disabled="{! v.planCounter == v.bPlansforUser.length - 1 }"       
+                                                  />
+                        </span>
+                        <span class="labelSpan slds-text-body--small slds-hyphenate slds-p-top--xx-small slds-show">
+                            Previous 
+                        </span>
+                    </div>
+                    <div class="slds-col nav-button-container">
+                        <span class="{! 'slds-icon_container slds-icon_container--circle slds-button--brand nav-button ' + (v.planCounter == 0 ? 'disabled' : '') }">
+                            <lightning:buttonIcon iconName="utility:right" 
+                                                  variant="brand" 
+                                                  size="x-small" 
+                                                  alternativeText="Next"
+                                                  onclick="{! c.showNextBusinessPlan}"
+                                                  disabled="{! v.planCounter == 0 }"/>
+                        </span>
+                        <span class="labelSpan slds-text-body--small slds-hyphenate slds-p-top--xx-small slds-show">
+                            Next 
+                        </span>
+                    </div>
+                    <div class="slds-col nav-button-container">
+                        <span class="{! 'slds-icon_container slds-icon_container--circle slds-button--brand nav-button ' + (v.isPlanSubmitted ? 'disabled' : '') }">
+                            <lightning:buttonIcon iconName="utility:people" 
+                                                  variant="brand" 
+                                                  size="x-small" 
+                                                  alternativeText="Submit"
+                                                  onclick="{! c.submitPlan}"
+                                                  disabled="{!v.isPlanSubmitted ? true : false }"/>
+                        </span>
+                        <span class="labelSpan slds-text-body--small slds-hyphenate slds-p-top--xx-small slds-show">
+                            {!v.publishButtonLabel} 
+                        </span>
+                    </div>
+                    
+                </div>
+                
+                
+                <!-- Mobile form factor div ends here -->
+                
+                
+                <!-- div with the Business Plan Vision Component -->
+                <div>
+                    <c:businessPlanVisionSummary headerLabel="{!v.visionHeaderSummaryLabel}"
+                                                 businessPlanId="{!v.bPlanId}"
+                                                 refresh="{!v.refreshChild}"/> 
+                    
+                </div>
+                
+                <!-- Sectional header for Goals -->
+                <div>
+                    <c:businessPlanGoalsHeader headerLabel="{!v.goalsHeaderLabel}"
+                                               businessPlanId="{!v.bPlanId}"
+                                               isPlanSubmitted="{!v.isPlanSubmitted}"
+                                               goalDueAlertText="{!v.goalDueAlertLabel}"
+                                               goalCompleteLabel="{!v.markGoalCompleteLabel}"
+                                               goalSortOrder="{!v.sortType}"/>
+                    
+                </div>         
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

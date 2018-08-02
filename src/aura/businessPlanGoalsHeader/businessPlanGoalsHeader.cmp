@@ -1,0 +1,36 @@
+<aura:component access="public" controller="BusinessPlanUtilities" >
+    <aura:attribute name="headerLabel" type="String" default="Goals" access="Public" />
+    <aura:attribute name="newGoalId" type="Id" access="Private" />
+    <aura:attribute name="businessPlanId" type="Id" access="Public" />
+    <aura:attribute name="goalsList" type="Object[]" access="Private" />
+    <aura:attribute name="isPlanSubmitted" type="Boolean" access="Public" />
+    <aura:attribute name="goalDueAlertText" type="String" access="Public" />
+    <aura:attribute name="goalSortOrder" type="String" access="Public" />
+    <aura:attribute name="goalCompleteLabel" type="String" access="Public" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.businessPlanId}" action="{!c.init}" />
+    <aura:handler event="c:businessPlanRefreshRequestAppEvent" action="{!c.init}"/>
+    <aura:handler event="c:businessPlanDeleteGoalEvent" action="{!c.deleteGoal}"/>
+    
+    
+    
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade styling-header-goals">
+            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">{!v.headerLabel}</span>
+            <lightning:button variant="bare" 
+                label="" 
+                class="styling-button-goal-create"
+                iconName="utility:add" 
+                iconPosition="left" 
+                disabled="{!v.isPlanSubmitted ? true : false }"
+                onclick="{!c.createGoal }" />
+        </h3>
+        
+        <div aria-hidden="false" class="slds-section__content">
+            <c:businessPlanGoalCardContainer goalId="{!v.newGoalId}" 
+                                             goals="{!v.goalsList}"
+                                             goalCompleteLabel="{!v.goalCompleteLabel}"
+                                             goalDueLabel="{!v.goalDueAlertText}"/>
+        </div>
+    </div>
+</aura:component>

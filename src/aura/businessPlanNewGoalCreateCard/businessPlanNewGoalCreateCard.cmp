@@ -1,0 +1,13 @@
+<aura:component access="public" controller="BusinessPlanUtilities">
+    <aura:attribute name="id" type="Id" default="" />
+    <aura:registerEvent name="refreshEvent" type="c:businessPlanRefreshRequestAppEvent"/>
+    <aura:registerEvent name="deleteGoalEvent" type="c:businessPlanDeleteGoalEvent"/>
+    
+    
+    <div aria-hidden="false" class="slds-section__content">
+        <force:recordEdit aura:id="edit" recordId="{!v.id}"/>
+        <lightning:button label="Save" onclick="{!c.save}"/>
+        <lightning:button label="Cancel" onclick="{!c.cancel}"/>
+    </div>
+    
+</aura:component>

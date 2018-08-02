@@ -1,0 +1,79 @@
+.THIS .styling-page-header {
+    padding: .65rem;
+}
+
+
+.THIS .year-field-styling {
+    width: 7.5rem;
+    display: inline-block;
+    margin-left: .5rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.THIS .styling-header-vision{
+    position: relative;
+}
+
+.THIS .header-styling {
+    margin-top: .5rem;
+    text-transform: uppercase;
+
+}
+
+.THIS .styling-button-plan {
+    position: absolute;
+    right: 1rem;
+
+}
+
+.THIS .styling-button-previous {
+    color: white;
+    border: none;
+}
+
+.THIS .buttons-group-styling {
+   /* padding-left: 2rem;*/
+}
+
+.THIS .nav-button {
+    font-size: 0.8em;
+}
+
+.THIS .labelSpan {
+    text-align: center;
+}
+
+.THIS .nav-button-container {
+    text-align: center;
+}
+
+.THIS .nav-mobile {
+    display: none;
+}
+
+.THIS .nav-desktop {
+    display: block;
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .THIS .nav-mobile {
+        display: flex;
+        padding-top: .75rem;
+    }
+    
+    .THIS .nav-desktop {
+        display: none;
+    }
+    
+    .THIS .slds-page-header__title {
+        text-align: center;
+    }
+    
+    .THIS .nav-button.disabled {
+        background-color: rgb(201, 199, 197);
+        border-color: rgb(201, 199, 197);
+    }
+}

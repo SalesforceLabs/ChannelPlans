@@ -1,0 +1,43 @@
+<aura:component access="public" >
+    <aura:attribute name="title" type="String" default=""/>
+    <aura:attribute name="editMode" type="Boolean" default="false" />
+    <aura:attribute name="goalId" type="Id" default="" />
+    <aura:attribute name="goalDueLabel" type="String" access="Public" />
+    <aura:attribute name="goalCompleteLabel" type="String" access="Public" />
+    <aura:attribute name="goals" type="Object[]" />
+    
+    <div class="slds-p-bottom_large slds-p-left_large styling-vision-header" style="">
+        <div class="slds-box styling-container">
+            <aura:set attribute="footer">
+                <lightning:badge label="Tag1"/>
+                <lightning:badge label="Tag2"/>
+                <lightning:badge label="Tag3"/>
+            </aura:set>
+            <aura:if isTrue="{!v.goalId}">
+                <div aria-hidden="false" class="slds-section__content">
+                    <c:businessPlanNewGoalCreateCard id="{!v.goalId}" />
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-grid slds-wrap slds-p-bottom_large  styling-vision-header" style="">
+                        <aura:iteration items="{! v.goals}" var="goal">
+                            <div class="slds-col slds-col_padded slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                <c:businessPlanGoalViewCard title="{!goal.cplan__Title__c}" 
+                                    summary="{!goal.cplan__Summary__c}"
+                                    type="{!goal.cplan__Type__c}"
+                                    initialValue="{!goal.cplan__Initial_Value__c}"
+                                    curentValue="{!goal.cplan__Current_Value__c}"
+                                    targetValue="{!goal.cplan__Target_Value__c}"
+                                    achieved="{!goal.cplan__percent_Complete__c}"
+                                    overdue="{!goal.cplan__Off_Track__c}"
+                                    goalDueAlertText="{!v.goalDueLabel}"
+                                    goalCompleteButtonText="{!v.goalCompleteLabel}"                       
+                                    businessPlanStatus="{!goal.cplan__BusinessPlan__r.cplan__Status__c}"
+                                    gId="{!goal.Id}" />
+                            </div>               
+                        </aura:iteration>                      
+                    </div>
+                </aura:set>    
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

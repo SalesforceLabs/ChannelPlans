@@ -1,0 +1,4 @@
+<!-- businessPlanRequestRefresh.evt -->
+<aura:event type="COMPONENT" description="Event template">
+    <aura:attribute name="reqRefresh" type="Boolean"/>
+</aura:event>

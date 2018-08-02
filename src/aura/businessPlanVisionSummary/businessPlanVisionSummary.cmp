@@ -1,0 +1,36 @@
+<aura:component access="public" controller="BusinessPlanUtilities" >
+    <aura:attribute name="businessPlanId" type="Id" access="Public" />
+    <aura:attribute name="editMode" type="Boolean" default="false" />
+    <aura:attribute name="headerLabel" type="String" default="Vision" access="Public" />
+    <aura:attribute name="refresh" type="Boolean" />	
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <aura:handler name="change" value="{! v.businessPlanId }" action="{! c.init }" />
+    
+    <aura:registerEvent name="refreshEvent" type="c:businessPlanRefreshRequestAppEvent"/>
+    
+    <div class="slds-section slds-is-open">
+        
+        <h3 class="slds-section__title slds-theme_shade styling-header-vision">
+            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">{!v.headerLabel}</span>
+            <lightning:button variant="bare" 
+                label="" 
+                iconName="utility:edit" 
+                class="styling-button-vision-edit"
+                iconPosition="right" 
+                onclick="{! c.showInEditMode }" />
+        </h3>
+        <aura:if isTrue="{!v.editMode}">
+            <div aria-hidden="false" class="slds-section__content">
+                <force:recordEdit aura:id="edit" recordId="{!v.businessPlanId}" onSaveSuccess="{! c.saveCompleted }"/>
+				<lightning:button label="Save" onclick="{!c.save}"/>
+            </div>
+            <!-- Record Display -->  
+            <aura:set attribute="else">
+                <div class="slds-p-bottom_large slds-p-left_large styling-vision-header" style="">
+                    <div aura:id="recordViewContainer">
+                    </div>
+                </div>
+            </aura:set>    
+        </aura:if>
+    </div>
+</aura:component>

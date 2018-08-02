@@ -1,0 +1,4 @@
+<!--businessPlanDeleteGoalEvent -->
+<aura:event type="APPLICATION">
+    <aura:attribute name="goalId" type="String"/>
+</aura:event>

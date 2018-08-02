@@ -1,0 +1,18 @@
+<aura:component access="public" >
+        <aura:attribute name="isDVisible" type="Boolean" default="false" />
+        
+        <lightning:button onclick="{! c.handleShowActiveSectionName }" label="Show Active Section Name"/>
+        <lightning:button onclick="{! c.handleToggleSectionD }" label="Toggle Section D"/>
+        <lightning:accordion aura:id="accordion" activeSectionName="A">
+            <lightning:accordionSection name="A" label="Accordion Title A">
+                <p>This is the content area for section A.</p>
+                <p>Donec vitae tellus egestas, faucibus ipsum ac, imperdiet erat. Nam venenatis non ante at sagittis. Integer vel purus eget nunc semper placerat. Nam tristique quam leo, et posuere enim condimentum quis. Ut sagittis libero id lectus tempor maximus. Nunc ut tincidunt eros, a hendrerit leo. Suspendisse quis fermentum dolor. Nulla euismod consectetur leo, id condimentum nunc consequat quis.</p>
+            </lightning:accordionSection>
+            <aura:if isTrue="{! v.isDVisible }">
+                <lightning:accordionSection name="D" label="Accordion Title D">
+                    <p>This is the content area for section D.</p>
+                    <p>Suspendisse est eros, maximus et risus a, luctus bibendum eros. Etiam ultrices tellus vehicula neque ornare, viverra venenatis purus accumsan. Aenean viverra finibus odio, vitae bibendum nisi tincidunt sed. Ut at porta dui. Praesent varius eleifend quam eget gravida. Curabitur maximus, leo sit amet dapibus gravida, mi ligula lacinia turpis, id feugiat tellus urna quis odio. Nullam tristique orci eu magna hendrerit vestibulum. Sed id purus at metus tristique tristique et vitae arcu. Sed molestie odio felis, sit amet lacinia mauris rutrum nec. Morbi semper lacinia tellus bibendum faucibus. Vestibulum eget ornare sapien, eget ultrices orci.</p>
+                </lightning:accordionSection>
+            </aura:if>
+        </lightning:accordion>
+</aura:component>

@@ -1,0 +1,128 @@
+.THIS.goal-view-card-styling {
+    /* width: 50%;*/
+    margin-bottom: 1rem;
+    border: none;
+}
+
+.THIS .card-icon {
+    margin-right: 0.75rem;
+}
+
+.THIS .goal-summary-styling {
+    padding: 1rem;
+    padding-left: 2.5rem;
+}
+
+.THIS.goal-view-card-styling:hover {
+    box-shadow: -1px 5px 25px -5px rgba(0,0,0,0.8);
+}
+
+.THIS .slds-card__footer {
+    /*text-align: left;*/
+    border-top: 1px solid rgb(217, 219, 221);
+}
+
+.THIS .goal-card-content-styling {
+    height: 10rem;
+    
+}
+
+.THIS .slds-card__footer.slds-badge {
+    text-align: left;
+    vertical-align: sub !important;
+}
+
+.THIS .slds-media__body.slds-truncate {
+    padding-top: 1rem;
+}
+
+.THIS .alert-styling {
+    margin-left: 2rem;
+    padding-bottom: .25rem;
+    line-height: 1;
+    height: 1.5rem;
+}
+
+.THIS .alert-badge-styling {
+    background-color: #f39c12;
+    color: white;
+    font-size: xx-small;
+}
+
+.THIS .footer-badge-styling {
+    vertical-align: sub !important;
+}
+
+.THIS .title-styling {
+    padding-left: .5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+  /*  .THIS .slds-card__footer {
+        display: none;
+    }*/
+    
+    .THIS .goal-card-content-styling {
+        height: 15rem;
+    }
+    
+    .THIS .ring-container {
+        text-align: center;
+    }
+    
+    .THIS .goal-summary-styling {
+        padding-left: 1rem;
+    }
+    
+    .THIS .summary-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    .THIS .title-styling {
+        white-space: normal;
+    }
+    
+    .THIS .slds-text-heading--small {
+        font-size: 1rem;
+        white-space: normal;
+    }
+    
+    .THIS .alert-styling {
+    	margin-left: 1.8rem;
+        margin-top: 0.2rem;
+    }
+}
+
+.THIS .mark-complete {
+    display: none;
+    border-style: none;
+    background-color: white;
+    padding: 1rem;
+    margin: auto;
+}
+
+.THIS:hover .mark-complete.valid {
+    display: block;
+}
+
+.THIS .mark-complete:hover svg {
+    fill: #4DB6AC;
+}
+
+.THIS .mark-complete:hover {
+    color: #4DB6AC;
+}
+
+.THIS:hover .slds-progress-ring.incomplete {
+    display: none;
+}
+
+.THIS .mark-complete-icon {
+    margin-bottom: 0.6rem;
+}

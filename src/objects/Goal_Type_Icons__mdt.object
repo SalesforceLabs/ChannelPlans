@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <label>Type</label>
+        <referenceTo>EntityDefinition</referenceTo>
+        <relationshipLabel>Goal_Type_Icons</relationshipLabel>
+        <relationshipName>Goal_Type_Icons</relationshipName>
+        <required>false</required>
+        <type>MetadataRelationship</type>
+        <unique>false</unique>
+    </fields>
+    <label>Goal Type Icon</label>
+    <pluralLabel>Goal Type Icons</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

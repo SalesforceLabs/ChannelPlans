@@ -1,0 +1,14 @@
+<aura:component access="Global">
+    <aura:attribute name="start" type="Decimal" default="0" access="Global" />
+    <aura:attribute name="current" type="Decimal" default="20" access="Global" />
+    <aura:attribute name="total" type="Decimal" default="100" access="Global" />
+    <aura:attribute name="color" type="String" default="#000" access="Global" />
+    
+    <aura:attribute name="fillPercentage" type="Decimal" access="Global" />
+    
+    <div class="{! 'slds-progress-ring bigger-ring ' + (v.current &lt; v.total ? 'incomplete' : 'complete') }">
+        <div class="slds-progress-ring__progress" role="progressbar" aria-valuemin="{! v.start }" aria-valuemax="{! v.total }" aria-valuenow="{! v.current }" aura:id="progressRingParent">
+        </div>
+        <div class="slds-progress-ring__content">{! v.fillPercentage }%</div>
+    </div>
+</aura:component>

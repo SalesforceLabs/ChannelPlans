@@ -1,0 +1,9 @@
+Hi, 
+
+A business plan with the following details is submitted for your review.
+
+Company: {!Business_Plan__c.PartnerAccount__c} 
+Plan Id: {!Business_Plan__c.Name}
+Access the Plan at : https://partnerapp-dev-ed.lightning.force.com/one/one.app#/sObject/{!Business_Plan__c.Id}/view
+
+Cheers!

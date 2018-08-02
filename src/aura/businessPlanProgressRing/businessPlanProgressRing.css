@@ -1,0 +1,16 @@
+.THIS.bigger-ring {
+    width: 6rem;
+    height: 6rem;
+}
+
+.THIS.slds-progress-ring {
+    border-radius: 50%;
+}
+
+.THIS .slds-progress-ring__content {
+    border-radius: 50%;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+}

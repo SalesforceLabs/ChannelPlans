@@ -1,0 +1,4 @@
+<!--businessPlanRefreshRequestAppEvent -->
+<aura:event type="APPLICATION">
+    <aura:attribute name="refresh" type="Boolean"/>
+</aura:event>

@@ -1,0 +1,11 @@
+<design:component label="Business Plans" >
+    <design:attribute name="businessPlanLabel" label="Business Plan Header Label" />
+    <design:attribute name="publishButtonLabel" label="Publish Button Label" />
+    <design:attribute name="visionHeaderSummaryLabel" label="Vision Section Header Label" />
+    <design:attribute name="goalsHeaderLabel" label="Goals Section Header Label" />	
+    <design:attribute name="toastWhenNoBPlanExists" label="Error Toast " />
+    <design:attribute name="goalDueAlertLabel" label="Goal Due Badge Label" description="Text to be displayed when a goal is due soon, please keep it under 10 characters" />
+    <design:attribute name="sortType" label="Sort Order for Goals" datasource="By Goal Creation Date ASC,By % completion ASC, By Goal End Date ASC, By Priority ASC" />
+     <design:attribute name="markGoalCompleteLabel" label="Mark Goal Complete Button Label" description="The label for the button to mark the goal complete with one click" />
+    <design:attribute name="invokeApproval" label="Trigger Approval upon Submission" description="Check this box if upon submission of a business plan it should go through an approval process prior to being 'Published'" />	   
+</design:component>

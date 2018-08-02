@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notification email when a business plan is submitted for review and approval</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Business Plan Submitted for Review</name>
+    <style>none</style>
+    <subject>Business Plan {!Business_Plan__c.Name} for {!Business_Plan__c.PartnerAccount__c} is submitted for review</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
